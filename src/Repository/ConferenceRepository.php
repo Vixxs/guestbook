@@ -63,4 +63,8 @@ class ConferenceRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findAll(): array{
+        return $this->findBy([], ['year' => 'ASC', 'city' => 'ASC']);
+    }
 }
