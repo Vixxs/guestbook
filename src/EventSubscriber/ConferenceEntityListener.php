@@ -8,19 +8,19 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ConferenceEntityListener
 {
-    private $slugger;
+    private SluggerInterface $slugger;
 
     public function __construct(SluggerInterface $slugger)
     {
         $this->slugger = $slugger;
     }
 
-    public function prePersist(Conference $conference, LifecycleEventArgs $event)
+    public function prePersist(Conference $conference, LifecycleEventArgs $event): void
     {
         $conference->computeSlug($this->slugger);
     }
 
-    public function preUpdate(Conference $conference, LifecycleEventArgs $event)
+    public function preUpdate(Conference $conference, LifecycleEventArgs $event): void
     {
         $conference->computeSlug($this->slugger);
     }
