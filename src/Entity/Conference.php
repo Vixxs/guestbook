@@ -11,7 +11,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: ConferenceRepository::class)]
 #[UniqueEntity('slug')]
-class Conference
+class
+Conference
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -46,9 +47,7 @@ class Conference
      */
     public function computeSlug(SluggerInterface $slugger): void
     {
-        if (!$this->slug || '-' === $this->slug){
             $this->slug  = (string) $slugger->slug((string) $this)->lower();
-        }
     }
     
     public function getId(): ?int
@@ -63,6 +62,7 @@ class Conference
 
     public function setCity(string $city): self
     {
+        $this->city = $city;
 
         return $this;
     }
