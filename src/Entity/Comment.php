@@ -43,8 +43,8 @@ class Comment
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoFilename = null;
 
-    #[ORM\Column(length: 255, options: ["default" => "submitted"])]
-    private ?string $state = "submitted";
+    #[ORM\Column(length: 255, options: ["default" => self::SUBMITED_STATE])]
+    private ?string $state = self::SUBMITED_STATE;
 
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
