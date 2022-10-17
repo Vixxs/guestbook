@@ -41,6 +41,7 @@ class CommentCrudController extends AbstractCrudController
             ->onlyOnIndex();
         yield TextareaField::new('text')
             ->hideOnIndex();
+        yield TextField::new('state');
         $createdAt = DateTimeField::new('createdAt')->setFormTypeOptions([
             'html5' => true,
             'years' => range(date('Y'), date('Y') + 5),
