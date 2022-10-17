@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraint as Assert;
 class Comment
 {
     const PUBLISHED_STATE = "published";
-    const SUBMITED_STATE = "submited";
+    const SUBMITTED_STATE = "submitted";
     const SPAM_STATE = "spam";
 
     #[ORM\Id]
@@ -43,8 +43,8 @@ class Comment
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoFilename = null;
 
-    #[ORM\Column(length: 255, options: ["default" => self::SUBMITED_STATE])]
-    private ?string $state = self::SUBMITED_STATE;
+    #[ORM\Column(length: 255, options: ["default" => self::SUBMITTED_STATE])]
+    private ?string $state = self::SUBMITTED_STATE;
 
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
