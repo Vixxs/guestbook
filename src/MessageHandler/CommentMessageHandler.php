@@ -32,6 +32,7 @@ class CommentMessageHandler implements MessageHandlerInterface
 
     public function __invoke(CommentMessage $message)
     {
+        error_log("Entering in messageHandler");
         $comment = $this->commentRepository->find($message->getId());
         if ($this->workflow->can($comment, 'accept')){
             $score = $this->spamChecker->getSpamScore($comment, $message->getContext());
@@ -47,8 +48,11 @@ class CommentMessageHandler implements MessageHandlerInterface
             $this->bus->dispatch($message);
         } elseif ($this->workflow->can($comment, 'publish') || $this->workflow->can($comment, 'publish_ham')){
             $this->workflow->apply($comment, $this->workflow->can($comment, 'publish') ? 'publish' : 'publish_ham');
+            error_log("Apply transition publish");
+            $this->entityManager->flush();
         } elseif ($this->logger){
             $this->logger->debug('Dropping comment message', ['comment' => $comment->getId(), 'state' => $comment->getState()]);
         }
+        error_log("Exit");
     }
 }
