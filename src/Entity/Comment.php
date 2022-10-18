@@ -14,6 +14,7 @@ class Comment
     const PUBLISHED_STATE = "published";
     const SUBMITTED_STATE = "submitted";
     const SPAM_STATE = "spam";
+    const REJECTED_STATE = "rejected";
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
