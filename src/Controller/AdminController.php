@@ -33,7 +33,7 @@ class AdminController extends AbstractController
     #[Route('/comment/review/{id}', name: 'review_comment')]
     public function reviewComment(Request $request, Comment $comment, Registry $registry): Response
     {
-        $accepted = !$request->get('rejected');
+        $accepted = !$request->get('reject');
         $machine = $registry->get($comment);
         if ($machine->can($comment, 'publish')){
             $transition = $accepted ? 'publish' : 'reject';
